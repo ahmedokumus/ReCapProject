@@ -59,5 +59,20 @@ namespace DataAccess.Concrete.InMemory
             Car carToDelete = _cars.FirstOrDefault(c => c.CarId == car.CarId);
             _cars.Remove(carToDelete);
         }
+
+        public List<Car> GetAllByColor(int colorId)
+        {
+            return _cars.Where(c => c.ColorId == colorId).ToList();
+        }
+
+        public Car GetById(int carId)
+        {
+            return _cars.SingleOrDefault(c => c.CarId == carId);
+        }
+
+        public List<Car> GetAllByBrand(int brandId)
+        {
+            return _cars.Where(c => c.BrandId == brandId).ToList();
+        }
     }
 }

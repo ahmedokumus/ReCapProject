@@ -14,6 +14,8 @@ namespace ConsoleUI
             {
                 Console.WriteLine(item.CarId);
             }
+            
+            Console.WriteLine(carManager.GetById(3).ModelYear);
         }
     }
 }
