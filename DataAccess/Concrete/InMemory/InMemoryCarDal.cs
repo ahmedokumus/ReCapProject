@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -34,9 +36,57 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
-        public List<Car> GetAll()
+        //public List<Car> GetAll()
+        //{
+        //    return _cars;
+        //}
+
+        //public void Add(Car car)
+        //{
+        //    _cars.Add(car);
+        //}
+
+        //public void Update(Car car)
+        //{
+        //    Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
+        //    carToUpdate.BrandId = car.BrandId;
+        //    carToUpdate.ColorId = car.ColorId;
+        //    carToUpdate.DailyPrice = car.DailyPrice;
+        //    carToUpdate.Description = car.Description;
+        //    carToUpdate.ModelYear = car.ModelYear;
+        //}
+
+        //public void Delete(Car car)
+        //{
+        //    Car carToDelete = _cars.FirstOrDefault(c => c.CarId == car.CarId);
+        //    _cars.Remove(carToDelete);
+        //}
+
+        //public List<Car> GetAllByColor(int colorId)
+        //{
+        //    return _cars.Where(c => c.ColorId == colorId).ToList();
+        //}
+
+        //public Car GetById(int carId)
+        //{
+        //    return _cars.SingleOrDefault(c => c.CarId == carId);
+        //}
+
+        //public List<Car> GetAllByBrand(int brandId)
+        //{
+        //    return _cars.Where(c => c.BrandId == brandId).ToList();
+        //}
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            return _cars;
+            Brand brand = new Brand();
+            return _cars.Where(c => c.BrandId == brand.BrandId).ToList();
+            //return _cars;
+        }
+
+        public Car GetById(Expression<Func<Car, bool>> filter)
+        {
+            Car car = new Car();
+            return _cars.SingleOrDefault(c => c.CarId == car.CarId);
         }
 
         public void Add(Car car)
@@ -56,23 +106,8 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            Car carToDelete = _cars.FirstOrDefault(c => c.CarId == car.CarId);
+            Car carToDelete = _cars.FirstOrDefault(c => c.CarId == car.CarId); 
             _cars.Remove(carToDelete);
-        }
-
-        public List<Car> GetAllByColor(int colorId)
-        {
-            return _cars.Where(c => c.ColorId == colorId).ToList();
-        }
-
-        public Car GetById(int carId)
-        {
-            return _cars.SingleOrDefault(c => c.CarId == carId);
-        }
-
-        public List<Car> GetAllByBrand(int brandId)
-        {
-            return _cars.Where(c => c.BrandId == brandId).ToList();
         }
     }
 }
