@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -41,41 +42,11 @@ namespace DataAccess.Concrete.InMemory
         //    return _cars;
         //}
 
-        //public void Add(Car car)
-        //{
-        //    _cars.Add(car);
-        //}
-
-        //public void Update(Car car)
-        //{
-        //    Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
-        //    carToUpdate.BrandId = car.BrandId;
-        //    carToUpdate.ColorId = car.ColorId;
-        //    carToUpdate.DailyPrice = car.DailyPrice;
-        //    carToUpdate.Description = car.Description;
-        //    carToUpdate.ModelYear = car.ModelYear;
-        //}
-
-        //public void Delete(Car car)
-        //{
-        //    Car carToDelete = _cars.FirstOrDefault(c => c.CarId == car.CarId);
-        //    _cars.Remove(carToDelete);
-        //}
-
-        //public List<Car> GetAllByColor(int colorId)
-        //{
-        //    return _cars.Where(c => c.ColorId == colorId).ToList();
-        //}
-
         //public Car GetById(int carId)
         //{
         //    return _cars.SingleOrDefault(c => c.CarId == carId);
         //}
 
-        //public List<Car> GetAllByBrand(int brandId)
-        //{
-        //    return _cars.Where(c => c.BrandId == brandId).ToList();
-        //}
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             Brand brand = new Brand();
@@ -108,6 +79,11 @@ namespace DataAccess.Concrete.InMemory
         {
             Car carToDelete = _cars.FirstOrDefault(c => c.CarId == car.CarId); 
             _cars.Remove(carToDelete);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 }
